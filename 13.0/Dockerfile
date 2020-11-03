@@ -62,6 +62,32 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
         && apt-get -y install --no-install-recommends ./odoo.deb \
         && rm -rf /var/lib/apt/lists/* odoo.deb
 
+
+RUN pip3 install \ 
+    bs4 \
+    PyPDF2 \
+    transliterate \
+    odfpy openpyxl \
+    SQLAlchemy \
+    cachetools>=2.0.1 cerberus pyquerystring parse-accept-language jsondiff \
+    ipdb \
+    validate-email==1.3 py3DNS==3.2.0 \
+    odoo-client-lib \
+    odooly \
+    pymorphy2  pymorphy2-dicts-ru \
+    bokeh==1.1.0 \
+    matplotlib \
+    textract \
+    python-docx \
+    html5lib
+
+# Install some deps
+RUN apt-get update \
+        && apt-get install -y --no-install-recommends \
+            tesseract-ocr-rus \
+            antiword \
+        && rm -rf /var/lib/apt/lists/*
+
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
