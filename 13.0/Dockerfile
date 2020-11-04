@@ -62,6 +62,14 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
         && apt-get -y install --no-install-recommends ./odoo.deb \
         && rm -rf /var/lib/apt/lists/* odoo.deb
 
+# Install some deps
+RUN apt-get update \
+        && apt-get install -y --no-install-recommends \
+            tesseract-ocr-rus \
+            antiword \
+            git \
+            wget \
+        && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install \ 
     bs4 \
@@ -79,14 +87,11 @@ RUN pip3 install \
     matplotlib \
     textract \
     python-docx \
-    html5lib
+    html5lib \
+    git+https://github.com/adhoc-dev/aeroolib.git \
+    git+https://github.com/aeroo/currency2text.git \
+    git+https://github.com/edgewall/genshi@stable/0.7.x
 
-# Install some deps
-RUN apt-get update \
-        && apt-get install -y --no-install-recommends \
-            tesseract-ocr-rus \
-            antiword \
-        && rm -rf /var/lib/apt/lists/*
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
