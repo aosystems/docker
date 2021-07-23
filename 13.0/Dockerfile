@@ -91,7 +91,8 @@ RUN pip3 install \
     pyjwt \
     git+https://github.com/adhoc-dev/aeroolib.git \
     git+https://github.com/aeroo/currency2text.git \
-    git+https://github.com/edgewall/genshi@stable/0.7.x
+    git+https://github.com/edgewall/genshi@stable/0.7.x \
+    datedelta
 
 
 # Copy entrypoint script and Odoo configuration file
