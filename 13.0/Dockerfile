@@ -54,8 +54,8 @@ RUN npm install -g rtlcss
 
 # Install Odoo
 ENV ODOO_VERSION 13.0
-ARG ODOO_RELEASE=20210720
-ARG ODOO_SHA=745f9d176fbe0a5f91459b8c89788ffde3bef476
+ARG ODOO_RELEASE=20210913
+ARG ODOO_SHA=2d7fd9bfe044fd7513d82a8ce5c1ee6b08498468
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
         && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
         && apt-get update \
@@ -88,7 +88,7 @@ RUN pip3 install \
     textract \
     python-docx \
     html5lib \
-    pyjwt \
+    pyjwt>2 \
     git+https://github.com/adhoc-dev/aeroolib.git \
     git+https://github.com/aeroo/currency2text.git \
     git+https://github.com/edgewall/genshi@stable/0.7.x \
